@@ -1,0 +1,30 @@
+spring:
+  profiles.active: "dev"
+---
+# definition of development profile - dev
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  # datasource definition - embedded H2 database in file mode with console enabled
+  datasource:
+    url: jdbc:h2:~/vortex-scheduler
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console.enabled: true
+logging:
+  file.name: "vortex-scheduler.log"
+server:
+  servlet:
+    context-path: "/vortex-scheduler"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+---
+# Insert configuration for other profiles here
