@@ -6,21 +6,35 @@ spring:
   config:
     activate:
       on-profile: "dev"
-  # datasource definition - embedded H2 database in file mode with console enabled
+  # datasource definition:
+  # - embedded H2 database in file mode
+  # - h2-console enabled
+  # - initialized on application startup
   datasource:
-    url: jdbc:h2:~/vortex-scheduler
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: "jdbc:h2:~/vortex-scheduler"
+    username: "sa"
+    password: "password"
+    driverClassName: "org.h2.Driver"
+    #platform: "h2"
+    initialization-mode: "embedded"
+    continue-on-error: true # ensures that application startup does not fail on SQL error caused by already existing tables
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: "org.hibernate.dialect.H2Dialect"
+    hibernate:
+      ddl-auto: "none"
   h2:
     console.enabled: true
+
+# logging configuration
 logging:
   file.name: "vortex-scheduler.log"
+
+# server configuration
 server:
   servlet:
     context-path: "/vortex-scheduler"
+
+# actuator configuration
 management:
   endpoints:
     web:
