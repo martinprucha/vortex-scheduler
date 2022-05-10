@@ -24,6 +24,10 @@ spring:
       ddl-auto: "none"
   h2:
     console.enabled: true
+  quartz:
+    job-store-type: jdbc # jdbc job store
+    jdbc:
+      initialize-schema: "always"
 
 # logging configuration
 logging:
